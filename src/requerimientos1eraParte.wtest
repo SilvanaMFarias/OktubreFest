@@ -1,0 +1,63 @@
+import Personas.*
+import MarcasYJarras.*
+
+describe "Requerimientos 1era Parte" {
+
+	
+
+	//Marcas de Cerveza
+	const patagonia = new Negra(contenidoDeLupulo = 5, paisDeFabricacion = "Argentina")
+	const corona = new Rubia(contenidoDeLupulo = 3, paisDeFabricacion = "México", graduacion = 5)
+	const heineken = new Rubia(contenidoDeLupulo = 5, paisDeFabricacion = "Países Bajos", graduacion = 4)
+	const salta = new Roja(contenidoDeLupulo = 4, paisDeFabricacion = "Argentina")
+	const estrellaDeGalicia = new Rubia(contenidoDeLupulo = 5, paisDeFabricacion = "España", graduacion = 9)
+	
+	//Jarras
+	const jarra1 = new Jarra(capacidad = 0.5, marca = patagonia)
+	const jarra2 = new Jarra(capacidad = 1, marca = corona)
+	const jarra3 = new Jarra(capacidad = 1.5, marca = heineken)
+	const jarra4 = new Jarra(capacidad = 1, marca = salta)
+	
+	
+	//Personas
+	const noah = new Belga(peso= 70, jarrasCompradas = [jarra1,jarra2,jarra3], leGustaEscucharMusicaTradicional = true, nivelDeAguante = 9)
+	const danka = new Checo(peso= 55, jarrasCompradas = [jarra2,jarra3,jarra4], leGustaEscucharMusicaTradicional = false, nivelDeAguante = 7)
+	const berthold = new Aleman(peso= 105, jarrasCompradas = [jarra1,jarra2,jarra3,jarra4], leGustaEscucharMusicaTradicional = true, nivelDeAguante = 20)
+	
+	
+	method initialize(){
+		graduacionReglamentaria.graduacion(4)
+	}
+	 
+	test "Contenido de Alcohol de una Jarra"{
+		assert.equals(0.02,jarra1.contenidoDeAlcohol())
+		assert.equals(0.05,jarra2.contenidoDeAlcohol())
+		assert.equals(0.06,jarra3.contenidoDeAlcohol())
+		assert.equals(0.05,jarra4.contenidoDeAlcohol())
+	}
+	
+	test "Total de Alcohol que ingirió una Persona"{
+		assert.equals(0.13,noah.alcoholIngerido())
+		assert.equals(0.16,danka.alcoholIngerido())
+		assert.equals(0.18,berthold.alcoholIngerido())
+	}
+	
+	test "¿Está ebria la persona?"{
+		assert.that(noah.estaEbria())
+		assert.that(danka.estaEbria())
+		assert.notThat(berthold.estaEbria())
+	}
+	
+	test "¿Le gusta determinada marca de cerveza"{
+		assert.notThat(noah.leGustaLaMarca(corona))
+		assert.that(noah.leGustaLaMarca(heineken))
+		assert.notThat(danka.leGustaLaMarca(corona))
+		assert.that(danka.leGustaLaMarca(estrellaDeGalicia))
+		assert.that(berthold.leGustaLaMarca(patagonia))
+		assert.that(berthold.leGustaLaMarca(corona))
+		assert.that(berthold.leGustaLaMarca(heineken))
+		assert.that(berthold.leGustaLaMarca(salta))
+		assert.that(berthold.leGustaLaMarca(estrellaDeGalicia))
+	}
+
+}

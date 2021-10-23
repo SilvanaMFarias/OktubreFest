@@ -1,5 +1,5 @@
 object graduacionReglamentaria {
-	const property graduacion = 1 //necesario inicializar - la variable nunca se asigna
+	var property graduacion
 }
 
 class MarcaDeCerveza {
@@ -14,7 +14,7 @@ class Rubia inherits MarcaDeCerveza {
 }
 
 class Negra inherits MarcaDeCerveza {
-	override method graduacion() = graduacionReglamentaria.graduacion().min(contenidoDeLupulo * 2 )
+	override method graduacion() = graduacionReglamentaria.graduacion().min(contenidoDeLupulo * 2)
 }
 
 class Roja  inherits Negra {

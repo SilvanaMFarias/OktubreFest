@@ -12,4 +12,18 @@ class Persona {
 	
 	method estaEbria()= (self.alcoholIngerido() * peso) > nivelDeAguante
 	
+	method leGustaLaMarca(unaMarca)
+	
+}
+
+class Belga inherits Persona{
+	override method leGustaLaMarca(unaMarca) = unaMarca.contenidoDeLupulo() > 4
+}
+
+class Checo inherits Persona{
+	override method leGustaLaMarca(unaMarca) = unaMarca.graduacion( ) > 8
+}
+
+class Aleman inherits Persona{
+	override method leGustaLaMarca(unaMarca) = true
 }
