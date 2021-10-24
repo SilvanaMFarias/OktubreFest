@@ -50,7 +50,7 @@ class Persona {
 
   method esCompatibleCon(unaPersona) = self.marcasComunes(unaPersona).size() > self.marcasDiferentes(unaPersona).size()
 
-  method carpasDondeLeSirvieron() = self.jarrasCompradas().map({ j => j.carpa() })
+  method carpasDondeLeSirvieron() = self.jarrasCompradas().map({ j => j.carpa() }).asSet()
 
 }
 
