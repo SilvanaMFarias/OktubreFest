@@ -67,7 +67,7 @@ class Carpa {
 
   method estaPersona(unaPersona) = personas.any({ p => p == unaPersona })
 
-  method dejaIngresar(unaPersona) = (not unaPersona.estaEbria()) and (limiteGente <= self.cantidadDePersonas() + 1)
+  method dejaIngresar(unaPersona) = (not unaPersona.estaEbria()) and (self.cantidadDePersonas() + 1 <= limiteGente)
 
   method agregarPersona(unaPersona) {
     personas.add(unaPersona)
@@ -81,7 +81,7 @@ class Carpa {
     }
   }
 
-  method ebriosEmpedernidos() = personas.count({ p => p.jarrasCompradas().all({ j => j.capacidad() >= 1}) })
+  method ebriosEmpedernidos() = personas.count({ p => p.esEbrioEmpedernido()})
 
   method esHomogenea() = personas.all({ p => p.paisDeNacimiento() == personas.first().paisDeNacimiento() })
 
