@@ -34,6 +34,24 @@ class Persona {
 
   method esPatriota() = jarrasCompradas.all({ j => j.marca().paisDeFabricacion() == self.paisDeNacimiento() })
 
+  method marcasCompradas() = jarrasCompradas.map({ j => j.marca() }).asSet()
+
+  method marcasDiferentes(unaPersona) {
+    var marcas
+    if (self.marcasCompradas().size() > unaPersona.marcasCompradas().size()) {
+      marcas = self.marcasCompradas().intersection(unaPersona.marcasCompradas())
+    } else {
+      marcas = unaPersona.marcasCompradas().intersection(self.marcasCompradas())
+    }
+    return marcas
+  }
+
+  method marcasComunes(unaPersona) = (self.marcasCompradas()).intersection(unaPersona.marcasCompradas())
+
+  method esCompatibleCon(unaPersona) = self.marcasComunes(unaPersona).size() > self.marcasDiferentes(unaPersona).size()
+
+  method carpasDondeLeSirvieron() = self.jarrasCompradas().map({ j => j.carpa() })
+
 }
 
 class Belga inherits Persona {

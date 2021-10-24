@@ -75,13 +75,17 @@ class Carpa {
 
   method servirUnaJarra(unaCapacidad, unaPersona) {
     if (self.estaPersona(unaPersona)) {
-      unaPersona.comprarJarra(new Jarra(capacidad = unaCapacidad, marca = cervezaTirada))
+      unaPersona.comprarJarra(new Jarra(capacidad = unaCapacidad, marca = cervezaTirada, carpa = self))
     } else {
       self.error("Persona no se encuentra en la carpa, para servir jarra.")
     }
   }
 
   method ebriosEmpedernidos() = personas.count({ p => p.jarrasCompradas().all({ j => j.capacidad() >= 1}) })
+
+  method esHomogenea() = personas.all({ p => p.paisDeNacimiento() == personas.first().paisDeNacimiento() })
+
+  method personasQueNoSeLesSirvio() = personas.filter({ p => p.jarrasCompradas().map({ j => j.carpa()}).contains(self) })
 
 }
 

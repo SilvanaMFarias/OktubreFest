@@ -35,6 +35,7 @@ class Jarra {
 
   const property capacidad
   const property marca
+  const property carpa
 
   method contenidoDeAlcohol() = marca.graduacion() * capacidad * 0.01
 
