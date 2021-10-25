@@ -18,9 +18,8 @@ class Persona {
 
   method leGustaLaMarca(unaMarca)
 
-  //method quiereEntrarALaCarpa(unaCarpa) = self.leGustaLaMarca(unaCarpa.cervezaTirada()) and /* XNOR */ (( self.leGustaEscucharMusicaTradicional() and unaCarpa.tieneBandaMusical()) or (not self.leGustaEscucharMusicaTradicional() and not unaCarpa.tieneBandaMusical()) )
   method quiereEntrarALaCarpa(unaCarpa) = self.leGustaLaMarca(unaCarpa.cervezaTirada()) and self.leGustaEscucharMusicaTradicional() == unaCarpa.tieneBandaMusical()
-  
+
   method puedeEntrarALaCarpa(unaCarpa) = self.quiereEntrarALaCarpa(unaCarpa) and unaCarpa.dejaIngresar(self)
 
   method entrarALaCarpa(unaCarpa) {
@@ -31,8 +30,8 @@ class Persona {
     }
   }
 
-  method esEbrioEmpedernido()= self.estaEbria() and jarrasCompradas.all({j => j.capacidad() >= 1})
-  
+  method esEbrioEmpedernido() = self.estaEbria() and jarrasCompradas.all({ j => j.capacidad() >= 1 })
+
   method paisDeNacimiento()
 
   method esPatriota() = jarrasCompradas.all({ j => j.marca().paisDeFabricacion() == self.paisDeNacimiento() })
@@ -54,13 +53,16 @@ class Persona {
   method esCompatibleCon(unaPersona) = self.marcasComunes(unaPersona).size() > self.marcasDiferentes(unaPersona).size()
 
   method carpasDondeLeSirvieron() = self.jarrasCompradas().map({ j => j.carpa() }).asSet()
-  
-  method indices()=(1..jarrasCompradas.size()-1)
-	
-  method estaEntrandoEnElVicio(){
-    return self.indices().all({i =>jarrasCompradas.get(i-1).capacidad() <= jarrasCompradas.get(i).capacidad()})
+
+  method indices() = (1 .. jarrasCompradas.size() - 1)
+
+  method estaEntrandoEnElVicio() {
+    return self.indices().all({ i => jarrasCompradas.get(i - 1).capacidad() <= jarrasCompradas.get(i).capacidad() })
   }
-	
+
+  method gastoTotalEnCerveza() = jarrasCompradas.sum({ j => j.precio() })
+
+  method jarraMasCara() = jarrasCompradas.max({ j => j.precio() })
 
 }
 

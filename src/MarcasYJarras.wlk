@@ -8,6 +8,7 @@ class MarcaDeCerveza {
 
   const property contenidoDeLupulo
   const property paisDeFabricacion
+  const property precioPorLitro
 
   method graduacion()
 
@@ -36,6 +37,7 @@ class Jarra {
   const property capacidad
   const property marca
   const property carpa
+  const property precio
 
   method contenidoDeAlcohol() = marca.graduacion() * capacidad * 0.01
 
