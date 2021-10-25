@@ -5,11 +5,11 @@ import Carpas.*
 describe "Requerimientos 1era Parte" {
 
   // Marcas de Cerveza
-  const patagonia = new Negra(contenidoDeLupulo = 5, paisDeFabricacion = "Argentina")
-  const corona = new Rubia(contenidoDeLupulo = 3, paisDeFabricacion = "México", graduacion = 5)
-  const heineken = new Rubia(contenidoDeLupulo = 5, paisDeFabricacion = "Países Bajos", graduacion = 4)
-  const salta = new Roja(contenidoDeLupulo = 4, paisDeFabricacion = "Argentina")
-  const estrellaDeGalicia = new Rubia(contenidoDeLupulo = 5, paisDeFabricacion = "España", graduacion = 9)
+  const patagonia = new Negra(contenidoDeLupulo = 5, paisDeFabricacion = "Argentina", precioPorLitro = 185)
+  const corona = new Rubia(contenidoDeLupulo = 3, paisDeFabricacion = "México", graduacion = 5, precioPorLitro = 200)
+  const heineken = new Rubia(contenidoDeLupulo = 5, paisDeFabricacion = "Países Bajos", graduacion = 4, precioPorLitro = 235)
+  const salta = new Roja(contenidoDeLupulo = 4, paisDeFabricacion = "Argentina",precioPorLitro = 185 )
+  const estrellaDeGalicia = new Rubia(contenidoDeLupulo = 5, paisDeFabricacion = "España", graduacion = 9, precioPorLitro = 255)
   
   //Carpas
   const carpa1 = new Carpa(limiteGente = 30, tieneBandaMusical = false, cervezaTirada = patagonia)
@@ -19,10 +19,10 @@ describe "Requerimientos 1era Parte" {
   const carpa5 = new Carpa(limiteGente = 10, tieneBandaMusical = true, cervezaTirada = estrellaDeGalicia)
   
   // Jarras
-  const jarra1 = new Jarra(capacidad = 0.5, marca = patagonia, carpa = carpa1)
-  const jarra2 = new Jarra(capacidad = 1, marca = corona, carpa = carpa2)
-  const jarra3 = new Jarra(capacidad = 1.5, marca = heineken, carpa = carpa3)
-  const jarra4 = new Jarra(capacidad = 1, marca = salta, carpa = carpa4)
+  const jarra1 = new Jarra(capacidad = 0.5, marca = patagonia, carpa = carpa1, precio= 190)
+  const jarra2 = new Jarra(capacidad = 1, marca = corona, carpa = carpa2, precio = 250)
+  const jarra3 = new Jarra(capacidad = 1.5, marca = heineken, carpa = carpa3, precio = 260)
+  const jarra4 = new Jarra(capacidad = 1, marca = salta, carpa = carpa4, precio = 210)
 
   // Personas
   const noah = new Belga(peso = 70, jarrasCompradas = [ jarra1, jarra2, jarra3 ], leGustaEscucharMusicaTradicional = true, nivelDeAguante = 9)

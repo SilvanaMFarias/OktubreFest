@@ -13,7 +13,7 @@ class Carpa {
 
   method estaPersona(unaPersona) = personas.any({ p => p == unaPersona })
 
-  method dejaIngresar(unaPersona) = (not unaPersona.estaEbria()) and (limiteGente <= self.cantidadDePersonas() + 1)
+  method dejaIngresar(unaPersona) = (not unaPersona.estaEbria()) and (self.cantidadDePersonas() + 1 <= limiteGente)
 
   method agregarPersona(unaPersona) {
     personas.add(unaPersona)
@@ -23,11 +23,11 @@ class Carpa {
     if (self.estaPersona(unaPersona)) {
       unaPersona.comprarJarra(new Jarra(capacidad = unaCapacidad, marca = cervezaTirada, carpa = self, precio = self.precioVentaPorLitro() * unaCapacidad))
     } else {
-      self.error("Persona no se encuentra en la carpa, para servir jarra.")
+      self.error("La persona no se encuentra en la carpa para poder servirle la jarra.")
     }
   }
 
-  method ebriosEmpedernidos() = personas.count({ p => p.jarrasCompradas().all({ j => j.capacidad() >= 1}) })
+  method ebriosEmpedernidos() = personas.count({ p => p.esEbrioEmpedernido()})
 
   method esHomogenea() = personas.all({ p => p.paisDeNacimiento() == personas.first().paisDeNacimiento() })
 
@@ -53,7 +53,7 @@ class Carpa {
     return porcentaje
   }
 
-  method precioVentaPorLitro() = cervezaTirada.precioPorLitro * (1 + self.recargo())
+  method precioVentaPorLitro() = cervezaTirada.precioPorLitro() * (1 + self.recargo())
 
 }
 
