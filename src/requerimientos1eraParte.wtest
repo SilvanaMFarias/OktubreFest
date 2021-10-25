@@ -16,13 +16,12 @@ describe "Requerimientos 1era Parte" {
   const carpa2 = new Carpa(limiteGente = 20, tieneBandaMusical = true, cervezaTirada = heineken)
   const carpa3 = new Carpa(limiteGente = 25, tieneBandaMusical = true, cervezaTirada = corona)
   const carpa4 = new Carpa(limiteGente = 50, tieneBandaMusical = false, cervezaTirada = salta)
-  const carpa5 = new Carpa(limiteGente = 10, tieneBandaMusical = true, cervezaTirada = estrellaDeGalicia)
   
   // Jarras
-  const jarra1 = new Jarra(capacidad = 0.5, marca = patagonia, carpa = carpa1, precio= 190)
-  const jarra2 = new Jarra(capacidad = 1, marca = corona, carpa = carpa2, precio = 250)
-  const jarra3 = new Jarra(capacidad = 1.5, marca = heineken, carpa = carpa3, precio = 260)
-  const jarra4 = new Jarra(capacidad = 1, marca = salta, carpa = carpa4, precio = 210)
+  const jarra1 = new Jarra(capacidad = 0.5, marca = patagonia, carpa = carpa1, precio= 185)
+  const jarra2 = new Jarra(capacidad = 1, marca = corona, carpa = carpa2, precio = 200)
+  const jarra3 = new Jarra(capacidad = 1.5, marca = heineken, carpa = carpa3, precio = 235)
+  const jarra4 = new Jarra(capacidad = 1, marca = salta, carpa = carpa4, precio = 255)
 
   // Personas
   const noah = new Belga(peso = 70, jarrasCompradas = [ jarra1, jarra2, jarra3 ], leGustaEscucharMusicaTradicional = true, nivelDeAguante = 9)

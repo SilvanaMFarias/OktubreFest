@@ -9,6 +9,8 @@ class Carpa {
   const personas = []
   var property tipoRecargo = "Fijo"
 
+  method personas()= personas
+  
   method cantidadDePersonas() = personas.size()
 
   method estaPersona(unaPersona) = personas.any({ p => p == unaPersona })
@@ -31,13 +33,17 @@ class Carpa {
 
   method esHomogenea() = personas.all({ p => p.paisDeNacimiento() == personas.first().paisDeNacimiento() })
 
-  method personasQueNoSeLesSirvio() = personas.filter({ p => p.jarrasCompradas().map({ j => j.carpa()}).contains(self) })
+  
+  method personasQueNoSeLesSirvio() {
+  	const personasConConsumo = personas.filter({ p => p.jarrasCompradas().map({ j => j.carpa() }).contains(self) }).asSet()
+  	return personas.asSet().difference(personasConConsumo)
+  }
 
   method recargoFijo() = 0.30
 
   method recargoPorCantidad() = if (self.cantidadDePersonas() > limiteGente / 2) 0.40 else 0.25
 
-  method recargoPorEbriedad() = if (personas.count({ p => p.estaEbria() }) > self.cantidadDePersonas() * 0.75) 0.50 else 0.20
+  method recargoPorEbriedad() = if (personas.count({ p => p.estaEbria() }) >= self.cantidadDePersonas() * 0.75) 0.50 else 0.20
 
   method recargo() {
     var porcentaje
