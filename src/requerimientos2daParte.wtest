@@ -2,80 +2,77 @@ import Personas.*
 import MarcasYJarras.*
 import Carpas.*
 
-describe "Requerimientos 2da Parte" { 
-	
+describe "Requerimientos 2da Parte" {
+
   // Marcas de Cerveza
   const patagonia = new Negra(contenidoDeLupulo = 5, paisDeFabricacion = "Argentina", precioPorLitro = 185)
   const corona = new Rubia(contenidoDeLupulo = 3, paisDeFabricacion = "México", graduacion = 5, precioPorLitro = 200)
   const heineken = new Rubia(contenidoDeLupulo = 5, paisDeFabricacion = "Países Bajos", graduacion = 4, precioPorLitro = 235)
-  const salta = new Roja(contenidoDeLupulo = 4, paisDeFabricacion = "Argentina",precioPorLitro = 185 )
-  const krombacher  = new Rubia(contenidoDeLupulo = 5, paisDeFabricacion = "Alemania", graduacion = 9, precioPorLitro = 255)
-  
+  const salta = new Roja(contenidoDeLupulo = 4, paisDeFabricacion = "Argentina", precioPorLitro = 185)
+  const krombacher = new Rubia(contenidoDeLupulo = 5, paisDeFabricacion = "Alemania", graduacion = 9, precioPorLitro = 255)
   // Personas
   const noah = new Belga(peso = 70, jarrasCompradas = [ ], leGustaEscucharMusicaTradicional = true, nivelDeAguante = 9)
-  const katia = new Belga(peso = 60,jarrasCompradas = [ ], leGustaEscucharMusicaTradicional = true, nivelDeAguante = 5 )
+  const katia = new Belga(peso = 60, jarrasCompradas = [ ], leGustaEscucharMusicaTradicional = true, nivelDeAguante = 5)
   const berthold = new Aleman(peso = 105, jarrasCompradas = [ ], leGustaEscucharMusicaTradicional = true, nivelDeAguante = 5)
   const adolf = new Aleman(peso = 95, jarrasCompradas = [ ], leGustaEscucharMusicaTradicional = true, nivelDeAguante = 7)
-  
-  
-  //Carpas
+  // Carpas
   const carpa1 = new Carpa(limiteGente = 30, tieneBandaMusical = true, cervezaTirada = patagonia)
   const carpa2 = new Carpa(limiteGente = 20, tieneBandaMusical = true, cervezaTirada = heineken)
   const carpa3 = new Carpa(limiteGente = 25, tieneBandaMusical = true, cervezaTirada = corona)
   const carpa4 = new Carpa(limiteGente = 50, tieneBandaMusical = false, cervezaTirada = salta)
   const carpa5 = new Carpa(limiteGente = 10, tieneBandaMusical = true, cervezaTirada = krombacher)
-  
-  
+
   method initialize() {
     graduacionReglamentaria.graduacion(4)
   }
-  
+
   test "Persona quiere entrar a la carpa" {
-  	noah.entrarALaCarpa(carpa1)
-  	assert.notThat(berthold.quiereEntrarALaCarpa(carpa1))
-  	katia.entrarALaCarpa(carpa1)
-  	assert.that(berthold.quiereEntrarALaCarpa(carpa1))
-  }
-  
-  test "Saber si una carpa deja ingresar a una persona"{
-  	assert.that(carpa1.dejaIngresar(berthold))
-  	assert.that(carpa2.dejaIngresar(berthold))
-  	carpa1.agregarPersona(berthold)
-  	carpa1.servirUnaJarra(5, berthold)
-  	assert.that(berthold.estaEbria())
-  	assert.notThat(carpa2.dejaIngresar(berthold))
-  }
-  
-  test "Saber si una persona puede entrar en la carpa"{
-  	assert.that(berthold.puedeEntrarALaCarpa(carpa1))
-  }
-  
-  test "Entrar a una carpa"{
-  	carpa1.agregarPersona(berthold)
-  	carpa1.servirUnaJarra(5, berthold)
-  	assert.that(berthold.estaEbria())
-  	assert.throwsException({berthold.entrarALaCarpa(carpa2)})
+    noah.entrarALaCarpa(carpa1)
+    assert.notThat(berthold.quiereEntrarALaCarpa(carpa1))
+    katia.entrarALaCarpa(carpa1)
+    assert.that(berthold.quiereEntrarALaCarpa(carpa1))
   }
 
-  test "Hacer que una carpa le sirve una cerveza a una persona"{
-  	assert.throwsException({carpa1.servirUnaJarra(5, berthold)})
+  test "Saber si una carpa deja ingresar a una persona" {
+    assert.that(carpa1.dejaIngresar(berthold))
+    assert.that(carpa2.dejaIngresar(berthold))
+    carpa1.agregarPersona(berthold)
+    carpa1.servirUnaJarra(5, berthold)
+    assert.that(berthold.estaEbria())
+    assert.notThat(carpa2.dejaIngresar(berthold))
   }
-  
-  test "Ebrios empedernidos en la carpa"{
-  	carpa4.agregarPersona(berthold)
-   	carpa4.servirUnaJarra(1, berthold)
-  	assert.equals(1,carpa4.ebriosEmpedernidos())
-  	carpa4.servirUnaJarra(0.5, berthold)
-  	assert.equals(0,carpa4.ebriosEmpedernidos())
+
+  test "Saber si una persona puede entrar en la carpa" {
+    assert.that(berthold.puedeEntrarALaCarpa(carpa1))
   }
-  
-  test "Persona es patriota"{
-  	carpa5.agregarPersona(berthold)
-  	carpa5.servirUnaJarra(1, berthold)
-  	assert.that(berthold.esPatriota())
-  	carpa4.agregarPersona(berthold)
-   	carpa4.servirUnaJarra(1, berthold)
-  	assert.notThat(berthold.esPatriota())
+
+  test "Entrar a una carpa" {
+    carpa1.agregarPersona(berthold)
+    carpa1.servirUnaJarra(5, berthold)
+    assert.that(berthold.estaEbria())
+    assert.throwsException({ berthold.entrarALaCarpa(carpa2)})
   }
- 
- }
+
+  test "Hacer que una carpa le sirve una cerveza a una persona" {
+    assert.throwsException({ carpa1.servirUnaJarra(5, berthold)})
+  }
+
+  test "Ebrios empedernidos en la carpa" {
+    carpa4.agregarPersona(berthold)
+    carpa4.servirUnaJarra(1, berthold)
+    assert.equals(1, carpa4.ebriosEmpedernidos())
+    carpa4.servirUnaJarra(0.5, berthold)
+    assert.equals(0, carpa4.ebriosEmpedernidos())
+  }
+
+  test "Persona es patriota" {
+    carpa5.agregarPersona(berthold)
+    carpa5.servirUnaJarra(1, berthold)
+    assert.that(berthold.esPatriota())
+    carpa4.agregarPersona(berthold)
+    carpa4.servirUnaJarra(1, berthold)
+    assert.notThat(berthold.esPatriota())
+  }
+
+}
+

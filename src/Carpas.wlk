@@ -9,8 +9,8 @@ class Carpa {
   const personas = []
   var property tipoRecargo = "Fijo"
 
-  method personas()= personas
-  
+  method personas() = personas
+
   method cantidadDePersonas() = personas.size()
 
   method estaPersona(unaPersona) = personas.any({ p => p == unaPersona })
@@ -29,14 +29,13 @@ class Carpa {
     }
   }
 
-  method ebriosEmpedernidos() = personas.count({ p => p.esEbrioEmpedernido()})
+  method ebriosEmpedernidos() = personas.count({ p => p.esEbrioEmpedernido() })
 
   method esHomogenea() = personas.all({ p => p.paisDeNacimiento() == personas.first().paisDeNacimiento() })
 
-  
   method personasQueNoSeLesSirvio() {
-  	const personasConConsumo = personas.filter({ p => p.jarrasCompradas().map({ j => j.carpa() }).contains(self) }).asSet()
-  	return personas.asSet().difference(personasConConsumo)
+    const personasConConsumo = personas.filter({ p => p.jarrasCompradas().map({ j => j.carpa()}).contains(self) }).asSet()
+    return personas.asSet().difference(personasConConsumo)
   }
 
   method recargoFijo() = 0.30

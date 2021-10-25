@@ -2,31 +2,27 @@ import Personas.*
 import MarcasYJarras.*
 import Carpas.*
 
-describe "Requerimientos Avanzados y Bonus" { 
-	
+describe "Requerimientos Avanzados y Bonus" {
+
   // Marcas de Cerveza
   const patagonia = new Negra(contenidoDeLupulo = 5, paisDeFabricacion = "Argentina", precioPorLitro = 185)
   const corona = new Rubia(contenidoDeLupulo = 3, paisDeFabricacion = "México", graduacion = 5, precioPorLitro = 200)
   const heineken = new Rubia(contenidoDeLupulo = 5, paisDeFabricacion = "Países Bajos", graduacion = 4, precioPorLitro = 235)
-  const salta = new Roja(contenidoDeLupulo = 4, paisDeFabricacion = "Argentina",precioPorLitro = 185 )
-  const krombacher  = new Rubia(contenidoDeLupulo = 5, paisDeFabricacion = "Alemania", graduacion = 9, precioPorLitro = 255)
-  
+  const salta = new Roja(contenidoDeLupulo = 4, paisDeFabricacion = "Argentina", precioPorLitro = 185)
+  const krombacher = new Rubia(contenidoDeLupulo = 5, paisDeFabricacion = "Alemania", graduacion = 9, precioPorLitro = 255)
   // Personas
   const noah = new Belga(peso = 70, jarrasCompradas = [ ], leGustaEscucharMusicaTradicional = true, nivelDeAguante = 9)
-  const katia = new Belga(peso = 60,jarrasCompradas = [ ], leGustaEscucharMusicaTradicional = true, nivelDeAguante = 5 )
+  const katia = new Belga(peso = 60, jarrasCompradas = [ ], leGustaEscucharMusicaTradicional = true, nivelDeAguante = 5)
   const berthold = new Aleman(peso = 105, jarrasCompradas = [ ], leGustaEscucharMusicaTradicional = true, nivelDeAguante = 5)
   const adolf = new Aleman(peso = 95, jarrasCompradas = [ ], leGustaEscucharMusicaTradicional = true, nivelDeAguante = 7)
-  
-  
-  //Carpas
+  // Carpas
   const carpa1 = new Carpa(limiteGente = 30, tieneBandaMusical = true, cervezaTirada = patagonia)
   const carpa2 = new Carpa(limiteGente = 20, tieneBandaMusical = true, cervezaTirada = heineken)
   const carpa3 = new Carpa(limiteGente = 25, tieneBandaMusical = true, cervezaTirada = corona)
   const carpa4 = new Carpa(limiteGente = 4, tieneBandaMusical = true, cervezaTirada = salta)
   const carpa5 = new Carpa(limiteGente = 10, tieneBandaMusical = true, cervezaTirada = krombacher)
-  
   // Jarras
-  const jarra1 = new Jarra(capacidad = 0.5, marca = patagonia, carpa = carpa1, precio= 190)
+  const jarra1 = new Jarra(capacidad = 0.5, marca = patagonia, carpa = carpa1, precio = 190)
   const jarra2 = new Jarra(capacidad = 1, marca = corona, carpa = carpa2, precio = 250)
   const jarra3 = new Jarra(capacidad = 1.5, marca = heineken, carpa = carpa3, precio = 260)
   const jarra4 = new Jarra(capacidad = 1, marca = salta, carpa = carpa4, precio = 210)
@@ -34,80 +30,83 @@ describe "Requerimientos Avanzados y Bonus" {
   method initialize() {
     graduacionReglamentaria.graduacion(4)
   }
-  test "Personas son compatibles"{
-  	const katrina = new Belga(peso = 60,jarrasCompradas = [jarra1,jarra2], leGustaEscucharMusicaTradicional = true, nivelDeAguante = 5 )
-  	const danka = new Checo(peso = 55, jarrasCompradas = [jarra2,jarra3,jarra4], leGustaEscucharMusicaTradicional = false, nivelDeAguante = 7)
-  	assert.notThat(katrina.esCompatibleCon(danka))
+
+  test "Personas son compatibles" {
+    const katrina = new Belga(peso = 60, jarrasCompradas = [ jarra1, jarra2 ], leGustaEscucharMusicaTradicional = true, nivelDeAguante = 5)
+    const danka = new Checo(peso = 55, jarrasCompradas = [ jarra2, jarra3, jarra4 ], leGustaEscucharMusicaTradicional = false, nivelDeAguante = 7)
+    assert.notThat(katrina.esCompatibleCon(danka))
   }
-  
-  test "Carpa es homogénea"{
-  	carpa3.agregarPersona(berthold)
-  	carpa3.agregarPersona(adolf)
-  	assert.that(carpa3.esHomogenea())
-  	carpa3.agregarPersona(katia)
-  	assert.notThat(carpa3.esHomogenea())
-	}
-  
-  test "Carpas en que le sirvieron Cerveza"{
-  	carpa4.agregarPersona(berthold)
-   	carpa4.servirUnaJarra(1, berthold)
-   	carpa5.agregarPersona(berthold)
-  	carpa5.servirUnaJarra(1, berthold)
-  	assert.equals(#{carpa4,carpa5},berthold.carpasDondeLeSirvieron())
+
+  test "Carpa es homogénea" {
+    carpa3.agregarPersona(berthold)
+    carpa3.agregarPersona(adolf)
+    assert.that(carpa3.esHomogenea())
+    carpa3.agregarPersona(katia)
+    assert.notThat(carpa3.esHomogenea())
   }
-  
-  test "A quienes no se les sirvió en determinada carpa"{
-  	carpa4.agregarPersona(berthold)
-   	carpa4.servirUnaJarra(1, berthold)
-   	carpa4.agregarPersona(adolf)
+
+  test "Carpas en que le sirvieron Cerveza" {
+    carpa4.agregarPersona(berthold)
+    carpa4.servirUnaJarra(1, berthold)
+    carpa5.agregarPersona(berthold)
+    carpa5.servirUnaJarra(1, berthold)
+    assert.equals(#{ carpa4, carpa5 }, berthold.carpasDondeLeSirvieron())
+  }
+
+  test "A quienes no se les sirvió en determinada carpa" {
+    carpa4.agregarPersona(berthold)
+    carpa4.servirUnaJarra(1, berthold)
+    carpa4.agregarPersona(adolf)
+    carpa4.agregarPersona(katia)
+    assert.equals(#{ adolf, katia }, carpa4.personasQueNoSeLesSirvio())
+  }
+
+  test "Está entrando en el vicio" {
+    carpa4.agregarPersona(berthold)
+    carpa4.servirUnaJarra(1, berthold)
+    carpa4.servirUnaJarra(1.5, berthold)
+    carpa4.servirUnaJarra(2, berthold)
+    assert.that(berthold.estaEntrandoEnElVicio())
+  }
+
+  test "Bonus - Precio de venta" {
+    assert.equals(185, salta.precioPorLitro())
+    assert.equals(240.5, carpa4.precioVentaPorLitro())
+    carpa4.tipoRecargo("Por Cantidad")
+    assert.equals(0.25, carpa4.recargo())
+    carpa4.agregarPersona(berthold)
+    carpa4.agregarPersona(katia)
+    carpa4.agregarPersona(adolf)
+    assert.equals(0.40, carpa4.recargo())
+    carpa4.tipoRecargo("Por Ebriedad")
+    carpa4.servirUnaJarra(8, berthold)
+    assert.equals(0.20, carpa4.recargo())
+    carpa4.servirUnaJarra(8, katia)
+    carpa4.servirUnaJarra(8, adolf)
+    assert.equals(277.5, carpa4.precioVentaPorLitro())
+  }
+
+  test "Bonus - Gasto total en cerveza y Jarra más cara" {
+    assert.equals(185, salta.precioPorLitro())
+    assert.equals(240.5, carpa4.precioVentaPorLitro())
+    carpa4.agregarPersona(berthold)
+    ;
   	carpa4.agregarPersona(katia)
-  	assert.equals(#{adolf,katia},carpa4.personasQueNoSeLesSirvio())
+    carpa4.agregarPersona(adolf)
+    carpa4.agregarPersona(noah)
+    carpa4.servirUnaJarra(1, berthold)
+    carpa4.tipoRecargo("Por Cantidad")
+    assert.equals(259, carpa4.precioVentaPorLitro())
+    carpa4.servirUnaJarra(8, katia)
+    carpa4.servirUnaJarra(8, noah)
+    carpa4.servirUnaJarra(8, adolf)
+    carpa4.servirUnaJarra(1, berthold)
+    carpa4.tipoRecargo("Por Ebriedad")
+    assert.equals(277.5, carpa4.precioVentaPorLitro())
+    carpa4.servirUnaJarra(1, berthold)
+    assert.equals(777, berthold.gastoTotalEnCerveza())
+    assert.equals(277.5, berthold.jarraMasCara().precio())
   }
-  
-  test "Está entrando en el vicio"{
-	carpa4.agregarPersona(berthold)
-	carpa4.servirUnaJarra(1, berthold)
-	carpa4.servirUnaJarra(1.5, berthold)
-	carpa4.servirUnaJarra(2, berthold)
-	assert.that(berthold.estaEntrandoEnElVicio())
-  }
-  
-  test "Bonus - Precio de venta"{
-  	assert.equals(185,salta.precioPorLitro())
-  	assert.equals(240.5,carpa4.precioVentaPorLitro())
-  	carpa4.tipoRecargo("Por Cantidad")
- 	assert.equals(0.25,carpa4.recargo())
-  	carpa4.agregarPersona(berthold)
-  	carpa4.agregarPersona(katia)
-  	carpa4.agregarPersona(adolf)
-  	assert.equals(0.40,carpa4.recargo())
-  	carpa4.tipoRecargo("Por Ebriedad")
-  	carpa4.servirUnaJarra(8, berthold)
-  	assert.equals(0.20,carpa4.recargo())
-  	carpa4.servirUnaJarra(8, katia)
-  	carpa4.servirUnaJarra(8, adolf)
-  	assert.equals(277.5,carpa4.precioVentaPorLitro())
-  }
-  
-  test "Bonus - Gasto total en cerveza y Jarra más cara"{
-  	assert.equals(185,salta.precioPorLitro())
-  	assert.equals(240.5,carpa4.precioVentaPorLitro())
-  	carpa4.agregarPersona(berthold);
-  	carpa4.agregarPersona(katia)
-  	carpa4.agregarPersona(adolf)
-  	carpa4.agregarPersona(noah)
-  	carpa4.servirUnaJarra(1,berthold)
-  	carpa4.tipoRecargo("Por Cantidad")
- 	assert.equals(259,carpa4.precioVentaPorLitro())
- 	carpa4.servirUnaJarra(8, katia)
- 	carpa4.servirUnaJarra(8, noah)
- 	carpa4.servirUnaJarra(8, adolf)
-  	carpa4.servirUnaJarra(1,berthold)
-  	carpa4.tipoRecargo("Por Ebriedad")
-  	assert.equals(277.5,carpa4.precioVentaPorLitro())
-  	carpa4.servirUnaJarra(1, berthold)
-  	assert.equals(777,berthold.gastoTotalEnCerveza())
-  	assert.equals(277.5,berthold.jarraMasCara().precio())
-  }
- 
+
 }
+
